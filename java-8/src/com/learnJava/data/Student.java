@@ -11,6 +11,7 @@ public class Student {
     private String gender;
     private int noteBooks;
     private Optional<Bike> bike;
+    private List<String> activities = new ArrayList<>();
 
     public Optional<Bike> getBike() {
         return bike;
@@ -24,7 +25,11 @@ public class Student {
 
     }
 
-    public Student(String name, int gradeLevel, double gpa, String gender, int noteBooks, List<String> activities) {
+    public Student(String s) {
+	    this.name = s;
+	}
+
+	public Student(String name, int gradeLevel, double gpa, String gender, int noteBooks, List<String> activities) {
         this.name = name;
         this.gradeLevel = gradeLevel;
         this.gpa = gpa;
@@ -33,25 +38,21 @@ public class Student {
         this.activities = activities;
     }
 
-    public int getNoteBooks() {
+    public Student(String name, int gradeLevel, double gpa, String gender, List<String> activities) {
+	    this.name = name;
+	    this.gradeLevel = gradeLevel;
+	    this.gpa = gpa;
+	    this.gender = gender;
+	    this.activities = activities;
+	}
+
+	public int getNoteBooks() {
 
         return noteBooks;
     }
 
     public void setNoteBooks(int noteBooks) {
         this.noteBooks = noteBooks;
-    }
-
-    public Student(String name, int gradeLevel, double gpa, String gender, List<String> activities) {
-        this.name = name;
-        this.gradeLevel = gradeLevel;
-        this.gpa = gpa;
-        this.gender = gender;
-        this.activities = activities;
-    }
-
-    public Student(String s) {
-        this.name = s;
     }
 
     public String getGender() {
@@ -86,8 +87,6 @@ public class Student {
         this.gpa = gpa;
     }
 
-    List<String> activities = new ArrayList<>();
-
     public  List<String> getActivities() {
         return this.activities;
     }
@@ -112,5 +111,27 @@ public class Student {
                 '}';
     }
 
-
+    public static class Builder {
+        private String name;
+        private int gradeLevel;
+        private double gpa;
+        private String gender;
+        private int noteBooks;
+        private Optional<Bike> bike;
+        private List<String> activities;
+        
+        public Builder() {};
+        
+        public Builder withName(String name) {
+        	this.name = name;
+        	return this;
+        }
+        public Builder withGradeLevel(int gradeLevel) {
+        	this.gradeLevel = gradeLevel;
+        	return this;
+        }
+        public Student build() {
+            return new Student(name,gradeLevel, gpa, gender, noteBooks, activities) ;
+        }
+    }
 }

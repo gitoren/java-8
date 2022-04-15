@@ -1,11 +1,11 @@
 package com.learnJava.methodreferences;
 
-import com.learnJava.data.Student;
-import com.learnJava.data.StudentDataBase;
-import com.learnJava.functionalInterfaces.SupplierExample;
-
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import com.learnJava.data.Student;
+import com.learnJava.data.StudentDataBase;
 
 public class RefactorMethodReferenceExample {
 
@@ -13,7 +13,7 @@ public class RefactorMethodReferenceExample {
 
     static Predicate<Student> predicateUsingMetRef = RefactorMethodReferenceExample::greaterThan;
 
-
+    public static Supplier<Student> studentSupplier = () -> new Student();
     static BiPredicate<Student,Integer> predicateUsingMethodReference = RefactorMethodReferenceExample::greaterThan;
 
     static public  boolean greaterThan(Student student){
@@ -28,7 +28,9 @@ public class RefactorMethodReferenceExample {
 
     public static void main(String[] args) {
 
-        System.out.println(predicateUsingLambda.test(StudentDataBase.studentSupplier.get()));
+    	Supplier<Student> studentSupplier = Student::new;
+    	
+    	System.out.println(predicateUsingLambda.test(StudentDataBase.studentSupplier.get()));
         System.out.println(predicateUsingMetRef.test(StudentDataBase.studentSupplier.get()));
         System.out.println(predicateUsingMethodReference.test(StudentDataBase.studentSupplier.get(),3));
 

@@ -10,12 +10,9 @@ public class LambdaVariable2 {
 
 
         // int value =4; //effectively final
-        Consumer<Integer> c1 = (a) -> {
-            value=6;
-            //  System.out.println(i+value);
-        };
-        //value =2;
+        Consumer<Integer> c1 = a -> value=a;
 
         c1.accept(2);
+        System.out.println(value);
     }
 }
